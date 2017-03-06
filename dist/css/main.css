@@ -1,0 +1,15 @@
+body{
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Raleway', sans-serif;
+}
+
+#pie-container{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+}
+
+canvas#myChart{
+    max-width: 80vh;
+}
