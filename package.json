@@ -1,10 +1,12 @@
 {
-  "name": "touche-pas-a-mon-harem",
+  "name": "tpamh",
   "version": "1.0.0",
   "description": "Shiawa app",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-packager . tpamh --platform win32 --arch x64 --out=build/ --asar=true --overwrite",
+    "setup": "electron-installer-windows --src build/tpamh-win32-x64/ --dest=build/installers/"
   },
   "keywords": [
     "Electron",
@@ -16,7 +18,9 @@
   "author": "GitHub",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^1.4.1"
+    "electron": "^1.4.1",
+    "electron-installer-windows": "^0.2.0",
+    "electron-packager": "^8.5.2"
   },
   "dependencies": {
     "chart.js": "^2.5.0",
