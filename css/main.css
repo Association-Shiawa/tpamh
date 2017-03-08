@@ -1,3 +1,13 @@
+@font-face {
+    font-family: "Raleway Regular";
+    src: url("../assets/fonts/Raleway-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Raleway Bold";
+    src: url("../assets/fonts/Raleway-Bold.ttf");
+}
+
 body{
     height: 100vh;
     overflow: hidden;
@@ -12,4 +22,82 @@ body{
 
 canvas#myChart{
     max-width: 80vh;
+}
+
+#menuScreen{
+    position: absolute;
+    height:100vh;
+
+    background: #FFF;
+    transition: all .8s;
+}
+
+#menuScreen .row{
+    height: 100%;
+}
+
+.toOutofScope{
+    transform: translate3D(0,100%,0);
+}
+
+.btn-choic-team{
+    padding: 20px 10px;
+    margin:10px 4px;
+    color: #000;
+    font-family: sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    position: relative;
+    text-decoration: none;
+    display:inline-block;
+    overflow:hidden;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.btn-choic-team span{
+    background:#FFF;
+    width:100%;
+    position:relative;
+    padding:10px 70px;
+    -moz-transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+    -o-transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+    -webkit-transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+    z-index: 2;
+    /*   border:1px solid #6098FF;  */
+}
+
+.btn-choic-team:hover span{
+    color: #ec407a!important;
+}
+
+.btn-choic-team:hover .transition-bar{
+    width:120%;
+    left:110%;
+    -moz-transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+    -o-transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+    -webkit-transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+    transition: all .65s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.transition-bar{
+    position: absolute;
+    top: 0;
+    left: 0%;
+    width: 0;
+    height: 100%;
+    background: #ec407a ;
+    z-index:1;
+    /*     -ms-transform: skewX(-20deg);
+        -webkit-transform: skewX(-20deg);
+        transform: skewX(-20deg); */
+}
+
+.shiawa{
+    font-size: 4em;
+}
+
+.pink-text{
+    color: #ec407a !important;
 }

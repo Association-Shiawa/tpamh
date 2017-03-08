@@ -6,14 +6,25 @@ class PieChart{
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
         this.best = null;
-    }
-
-    chart(){
-        return new Chart(this.ctx,{
+        this.colors = [
+            "#FF6384",
+            "#36A2EB",
+            "#FFCE56",
+            "#8dc73f"
+        ];
+        this.chart = new Chart(this.ctx,{
             type: 'pie',
             data: this.data(),
             options: this.options()
-        })
+        });
+
+        for(var i = 1; i <= this.nbTeam; i++){
+            this.newTeam(i);
+        }
+    }
+
+    get pie(){
+        return this.chart;
     }
 
     get best(){
@@ -24,38 +35,43 @@ class PieChart{
 
     }
 
-    newTeam(){
+    updateScore(){
 
     }
 
-    colors() {
-        return [
-            "#ec407a",
-            "#457810",
-            "#ec78dc",
-            "#78df45"
-        ]
+    newTeam(nb){
+        let labels = this.chart.data.labels;
+        let bgColors = this.chart.data.datasets[0].backgroundColor;
+        let hoverColors = this.chart.data.datasets[0].hoverBackgroundColor;
+        let data = this.chart.data.datasets[0].data;
+        let randomColor = this.getColor();
+        let name = "Equipe " + nb;
+
+        labels.push(name);
+        data.push(1);
+        bgColors.push(randomColor);
+        hoverColors.push(randomColor);
+
+        this.chart.update();
+    }
+
+    getColor(){
+        return this.colors.pop()
     }
 
     data() {
         return {
             labels: [
-                "Red",
-                "Blue",
-                "Yellow"
+
             ],
             datasets: [
                 {
-                    data: [1, 1, 1],
+                    data: [],
                     backgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
+
                     ],
                     hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
+
                     ]
                 }]
         };
@@ -71,4 +87,18 @@ class PieChart{
     }
 
 }
+
+
+function randomize(){
+    setInterval(function(){
+        // Get a random index point
+        let indexToUpdate = Math.round(Math.random() * (data.datasets[0].data.length -1) );
+
+        // Update one of the points in the second dataset
+        myPieChart.data.datasets[0].data[indexToUpdate] = Math.random() * 100;
+
+        myPieChart.update();
+    }, 100);
+}
+
 module.exports = PieChart;

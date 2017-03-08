@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8">
     <title>Shiawa - Touche pas à mon Harem</title>
-    <link href="https://fonts.googleapis.com/css?family=Raleway:400,700" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="node_modules/flexboxgrid-sass/dist/flexboxgrid.css">
     <link rel="stylesheet" href="css/main.css">
   </head>
   <body>
@@ -12,15 +12,43 @@
 
     <!--<a href="https://zestedesavoir.com/tutoriels/996/vos-applications-avec-electron/">Continuer à apprendre</a>-->
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3">
-          <ul>
-
-          </ul>
+    <div id="menuScreen" class="container-fluid">
+      <div class="row center-xs middle-xs around-xs">
+        <h2 class="col-md-12 pink-text shiawa">
+          Touche pas à mon Harem
+        </h2>
+        <div class="col-md-12">
+          <img src="assets/icons/png/512x512.png" alt="">
+          <h1 class="pink-text shiawa">
+            Shiawa
+          </h1>
         </div>
-        <div class="col-sm-9">
-          <div class="row">
+        <div>
+          <div>
+            <h3>Sélectionnez le nombre d'équipes</h3>
+          </div>
+          <div>
+            <a id="value-2" class="btn-choic-team">
+              <span>2 équipes</span>
+              <div class="transition-bar"></div>
+            </a>
+            <a id="value-3" class="btn-choic-team">
+              <span>3 équipes</span>
+              <div class="transition-bar"></div>
+            </a>
+            <a id="value-4" class="btn-choic-team">
+              <span>4 équipes</span>
+              <div class="transition-bar"></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid" id="game">
+      <div class="row center-xs">
+        <div class="col-xs-12">
+          <div class="row center-xs">
             <h1>
               Touche pas à mon Harem
             </h1>
@@ -28,6 +56,9 @@
           <div id="pie-container" class="row">
             <canvas id="myChart" width="400" height="400"></canvas>
           </div>
+          <h2>
+            La meilleure équipe : <span id="best">Equipe bleue</span>
+          </h2>
         </div>
       </div>
     </div>

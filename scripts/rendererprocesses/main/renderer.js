@@ -5,41 +5,28 @@
 
 let PieChart = require('./PieChart');
 
+let menuScreen = document.getElementById("menuScreen")
 let canvas = document.getElementById("myChart")
 let ctx = canvas.getContext("2d")
+let myPieChart, mpc;
 
-myPieChart = new PieChart(4, canvas);
-let mpc = myPieChart.chart();
+let gameSelectors = document.querySelectorAll(".btn-choic-team")
 
-function randomize(){
-    setInterval(function(){
-        // Get a random index point
-        let indexToUpdate = Math.round(Math.random() * (data.datasets[0].data.length -1) );
+gameSelectors.forEach(function(element){
+    element.addEventListener('click', generateScene)
+})
 
-        // Update one of the points in the second dataset
-        myPieChart.data.datasets[0].data[indexToUpdate] = Math.random() * 100;
+function generateScene(e){
+    let id = e.currentTarget.id;
+    let nbPlayer = id.slice(-1);
+    menuScreen.classList.add("toOutofScope")
 
-        myPieChart.update();
-    }, 100);
-}
 
-function newTeam(name) {
-    let labels = myPieChart.data.labels;
-    let bgColors = myPieChart.data.datasets[0].backgroundColor;
-    let hoverColors = myPieChart.data.datasets[0].hoverBackgroundColor;
-    let data = myPieChart.data.datasets[0].data;
-    let randomColor = '#'+Math.floor(Math.random()*16777215).toString(16);
-    let randomColor2 = '#'+Math.floor(Math.random()*16777215).toString(16);
-
-    labels.push(name);
-    data.push(10);
-    bgColors.push(randomColor);
-    hoverColors.push(randomColor2);
-}
-
-function updateScore(team, score ) {
+    myPieChart = new PieChart(nbPlayer, canvas);
+    mpc = myPieChart.pie;
 
 }
+
 
 canvas.onclick = function (evt) {
     //ajout de système de dblclick si deux clics sont effectués à la suite
@@ -54,7 +41,5 @@ canvas.onclick = function (evt) {
     var url = "http://example.com/?label=" + label + "&value=" + value;
     console.log(url);
 };
-
-// randomize();
 
 
