@@ -1,11 +1,15 @@
 let Chart = require('chart.js')
 
+Array.max = function( array ){
+    return Math.max.apply( Math, array );
+};
+
 class PieChart{
     constructor(nbTeam, canvas) {
         this.nbTeam = nbTeam;
         this.canvas = canvas;
         this.ctx = canvas.getContext("2d");
-        this.best = null;
+        this.bestTeam = null;
         this.colors = [
             "#FF6384",
             "#36A2EB",
@@ -28,15 +32,30 @@ class PieChart{
     }
 
     get best(){
-
+        return this.bestTeam;
     }
 
     set best(best){
-
+        this.bestTeam = best;
     }
 
-    updateScore(){
+    setBest(){
+        let arrayData = this.chart.data.datasets[0].data;
+        let maxX = Array.max(arrayData);
+        let bests = ""
+        let labels = this.chart.data.labels;
 
+        arrayData.forEach(function(element, index){
+            if(element == maxX)
+            {
+                if(bests != ""){
+                    bests += ", "
+                }
+                bests += labels[index];
+            }
+        });
+
+        this.best = bests;
     }
 
     newTeam(nb){

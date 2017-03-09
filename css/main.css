@@ -34,6 +34,7 @@ canvas#myChart{
 
 #menuScreen .row{
     height: 100%;
+    overflow: auto;
 }
 
 .toOutofScope{

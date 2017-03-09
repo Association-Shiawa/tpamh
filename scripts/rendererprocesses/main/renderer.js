@@ -11,6 +11,7 @@ let ctx = canvas.getContext("2d")
 let myPieChart, mpc;
 
 let gameSelectors = document.querySelectorAll(".btn-choic-team")
+let bestZone = document.getElementById("best")
 
 gameSelectors.forEach(function(element){
     element.addEventListener('click', generateScene)
@@ -27,19 +28,44 @@ function generateScene(e){
 
 }
 
+var timer;
+var isClicked = 0;
 
-canvas.onclick = function (evt) {
-    //ajout de système de dblclick si deux clics sont effectués à la suite
+canvas.ondblclick = function (evt) {
+    console.log("dbl click")
+    isClicked = 0;
     var activePoints = mpc.getElementsAtEvent(evt);
     var chartData = activePoints[0]['_chart'].config.data;
     var idx = activePoints[0]['_index'];
 
     var label = chartData.labels[idx];
-    var value = chartData.datasets[0].data[idx]++;
+    var value = chartData.datasets[0].data[idx]--;
     mpc.update();
-
-    var url = "http://example.com/?label=" + label + "&value=" + value;
-    console.log(url);
+    showBest();
 };
 
+canvas.onclick = function (evt) {
+    console.log("timer : "+timer)
+    console.log("Isclicked : "+ isClicked)
 
+    if (isClicked) { clearTimeout(timer); return;}
+    isClicked = 1;
+    timer = setTimeout(function() {
+        isClicked = 0;
+        var activePoints = mpc.getElementsAtEvent(evt);
+        var chartData = activePoints[0]['_chart'].config.data;
+        var idx = activePoints[0]['_index'];
+
+        var label = chartData.labels[idx];
+        var value = chartData.datasets[0].data[idx]++;
+        mpc.update();
+        showBest();
+
+    }, 400);
+};
+
+function showBest(){
+    myPieChart.setBest();
+    console.log(myPieChart.best);
+    bestZone.innerText = myPieChart.best;
+}

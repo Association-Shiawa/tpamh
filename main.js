@@ -14,8 +14,8 @@ let mainWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
+    width: 1000,
+    height: 900,
     icon: path.join(__dirname, 'assets/icons/png/64x64.png'),
     title: 'Shiawa - Jeu du Harem',
     center: true,
