@@ -3,6 +3,8 @@ const electron = require('electron')
 const app = electron.app
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
+//Module de signaux
+const ipc = electron.ipcMain;
 
 const path = require('path')
 const url = require('url')
@@ -10,6 +12,7 @@ const url = require('url')
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
+let childWindow
 
 function createWindow () {
   // Create the browser window.
@@ -65,3 +68,45 @@ app.on('activate', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
+let nbTeamGame = 0;
+
+ipc.on('game-start', (event, nbTeam) => {
+  nbTeamGame = nbTeam;
+
+  console.log(nbTeam)
+
+  childWindow = new BrowserWindow({
+    parent: mainWindow,
+    width: 1000,
+    height: 300,
+    icon: path.join(__dirname, 'assets/icons/png/64x64.png'),
+    title: 'Shiawa - Panel de contrôle',
+    // frame: false
+  });
+
+  childWindow.loadURL(url.format({
+    pathname: path.join(__dirname, 'views/controls.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
+})
+
+ipc.on('controls-ready', () => {
+  childWindow.webContents.send('nb-teams', nbTeamGame)
+})
+
+ipc.on('double-score-clicked', (evt, id) => {
+  console.log("double score of team :" + id)
+  mainWindow.webContents.send('double-score', id)
+});
+
+ipc.on('update-score-clicked', (evt, id, score) => {
+  console.log("change score of team :" + id +" / score : "+ score)
+  mainWindow.webContents.send('update-chart-score', id, score)
+});
+
+ipc.on('updated-score', (evt, id, score) => {
+  console.log("changed score of team :" + id +" / score : "+ score)
+  childWindow.webContents.send('update-input-score', id, score)
+});

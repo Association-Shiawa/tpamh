@@ -8,6 +8,11 @@
     src: url("../assets/fonts/Raleway-Bold.ttf");
 }
 
+*::selection{
+    background: none;
+    color: #ec407a;
+}
+
 body{
     height: 100vh;
     overflow: hidden;
@@ -101,4 +106,8 @@ canvas#myChart{
 
 .pink-text{
     color: #ec407a !important;
+}
+
+.draggable{
+    -webkit-app-region: drag;
 }
